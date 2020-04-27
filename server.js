@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const PORT = process.env.PORT || 3000;
 
 //Setting up app and model require
-const Exercise = require("./exerciseModel.js");
+const db = require("./models");
 const app = express();
 //activate logger
 app.use(logger("dev"));
