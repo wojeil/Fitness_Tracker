@@ -1,16 +1,9 @@
 const db = require("../model");
 const router = require("express").Router();
 
+//getting all workouts on page
 router.get("/workouts", (req,res)=>{
-    db.Cardio.find({})
-    .then(dbWorkouts => {
-      res.json(dbWorkouts);
-      console.log(dbWorkouts);
-    })
-    .catch(err => {
-      res.json(err);
-    });
-    db.Resistance.find({})
+    db.Workout.find({})
     .then(dbWorkouts => {
       res.json(dbWorkouts);
       console.log(dbWorkouts);
@@ -20,7 +13,7 @@ router.get("/workouts", (req,res)=>{
     });
 })
 
-
+//
 
 
 module.exports = router;
