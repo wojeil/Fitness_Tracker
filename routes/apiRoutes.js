@@ -13,7 +13,28 @@ router.get("/workouts", (req,res)=>{
     });
 })
 
-//
+//creating new workouts
+router.post("/workouts", (req,res) => {
+  db.Workout.create(req.body)
+  .then(dbWorkouts => {
+    res.json(dbWorkouts);
+  }) 
+  .catch(err => {
+    res.json(err);
+  });
+});
+
+//add new exercise
+router.put("/workouts/:id", (req,res) => {
+  db.Workout.update(req.param.id)
+  .then(dbWorkouts => {
+    res.json(dbWorkouts);
+  }) 
+  .catch(err => {
+    res.json(err);
+  });
+});
+
 
 
 module.exports = router;
