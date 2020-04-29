@@ -1,3 +1,17 @@
+// let totalDuration= [];
+
+// function populateTotalDuration() {
+//   // reduce transaction amounts to a single total value
+//   const total = totalDuration.reduce((total, ) => {
+//     return total + parseInt(t.value);
+//   }, 0);
+
+//   const totalEl = document.querySelector("#total");
+//   totalEl.textContent = total;
+// }
+
+
+
 const API = {
   async getLastWorkout() {
     let res;
@@ -7,7 +21,11 @@ const API = {
       console.log(err)
     }
     const json = await res.json();
-
+    var total = 0
+      for (let i = 0; i < json[json.length - 1].exercises.length; i++) {
+           total += json[json.length - 1].exercises[i].duration; 
+          }
+      json[json.length - 1].totalDuration = total;
     return json[json.length - 1];
   },
   async addExercise(data) {

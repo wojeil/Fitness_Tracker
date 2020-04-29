@@ -14,7 +14,6 @@ router.get("/workouts", (req,res)=>{
 
 //creating new workouts
 router.post("/workouts", ({body},res) => {
-  fullDuration();
   db.Workout.create(body,(err,dbWorkouts) => {
     if(err){
       console.log(err);
