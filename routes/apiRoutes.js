@@ -3,38 +3,46 @@ const router = require("express").Router();
 
 //getting all workouts on page
 router.get("/workouts", (req,res)=>{
-    db.Workout.find({})
-    .then(dbWorkouts => {
-      res.json(dbWorkouts);
-      console.log(dbWorkouts);
-    })
-    .catch(err => {
-      res.json(err);
-    });
+  db.Workout.find({},(err, dbWorkouts) =>{
+    if(err){
+      console.log(err);
+    }
+    res.json(dbWorkouts);
+    console.log(dbWorkouts);
+  })
 })
 
 //creating new workouts
-router.post("/workouts", (req,res) => {
-  db.Workout.create(req.body)
-  .then(dbWorkouts => {
+router.post("/workouts", ({body},res) => {
+  db.Workout.create(body,(err,dbWorkouts) => {
+    if(err){
+      console.log(err);
+    }
     res.json(dbWorkouts);
   }) 
-  .catch(err => {
-    res.json(err);
-  });
+
 });
 
 //add new exercise
 router.put("/workouts/:id", (req,res) => {
-  db.Workout.update(req.param.id)
-  .then(dbWorkouts => {
-    res.json(dbWorkouts);
-  }) 
-  .catch(err => {
-    res.json(err);
+  db.Workout.findByIdAndUpdate(req.params.id, {$push: {exercises: req.body}}, (err, dbWorkouts) =>{
+    if(err) {
+      console.log(err);
+    }
+    res.json(dbWorkouts)
   });
-});
+})
 
 
+//placing all workouts in stats
+router.get("/workouts/range", (req,res)=>{
+  db.Workout.find({},(err, dbWorkouts) =>{
+    if(err){
+      console.log(err);
+    }
+    res.json(dbWorkouts);
+    console.log(dbWorkouts);
+  })
+})
 
 module.exports = router;
