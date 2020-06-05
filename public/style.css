@@ -28,7 +28,7 @@ nav {
 
 a{
   color: white !important;
- 
+  margin-left: 1%;
 }
 a:hover {
   text-decoration: none !important;
